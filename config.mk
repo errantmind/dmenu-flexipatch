@@ -37,8 +37,8 @@ LIBS = -L$(X11LIB) -lX11 $(XINERAMALIBS) $(FREETYPELIBS) $(JANSSONLIBS) -lm $(XR
 
 # flags
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_POSIX_C_SOURCE=200809L -DVERSION=\"$(VERSION)\" $(XINERAMAFLAGS) $(EXTRAFLAGS)
-CFLAGS   = -std=c99 -pedantic -Wall -Os $(INCS) $(CPPFLAGS)
-LDFLAGS  = $(LIBS)
+CFLAGS   = -std=c99 -pedantic -Wall -march=native -O3 -flto -pipe -fno-plt $(INCS) $(CPPFLAGS)
+LDFLAGS  = $(LIBS) $(CFLAGS) -Wl,-O3,--sort-common,--as-needed,-z,now
 
 # compiler and linker
 CC = cc
